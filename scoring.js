@@ -38,20 +38,20 @@ function calculateReturnScore(player) {
 module.exports.calculateScore = function (player) {
   switch (player.position) {
     case 'QB':
-      return calculatePassingScore(player) + calculateRushingScore(player);
-      break;
+      return calculatePassingScore(player) + 
+             calculateRushingScore(player);
     case 'RB':
-      return calculateRushingScore(player) + calculateReceivingScore(player) + calculateReturnScore(player);
-      break;
+      return calculateRushingScore(player) + 
+             calculateReceivingScore(player) + 
+             calculateReturnScore(player);
     case 'WR':
-        return calculateRushingScore(player) + calculateReceivingScore(player) + calculateReturnScore(player);
-        break;
+      return calculateRushingScore(player) + 
+             calculateReceivingScore(player) + 
+             calculateReturnScore(player);
     case 'TE':
-        return calculateReceivingScore(player);
-        break;
+      return calculateReceivingScore(player);
     default:
-        return 0;
-        break;
-        
+      return 0;
   }
 }
+
