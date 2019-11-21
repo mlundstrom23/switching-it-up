@@ -35,23 +35,30 @@ function calculateReturnScore(player) {
   return parseFloat((kickYards + kickTouchdowns + kickFumbles + puntYards + puntTouchdowns + puntFumbles).toFixed(2))
 }
 
-module.exports.calculateScore = function (player) {
+// turned into function instead of exporting the calculation
+function calculateScore(player) {
   switch (player.position) {
     case 'QB':
-      return calculatePassingScore(player) + calculateRushingScore(player);
-      break;
+      return calculatePassingScore(player) + 
+             calculateRushingScore(player);
     case 'RB':
-      return calculateRushingScore(player) + calculateReceivingScore(player) + calculateReturnScore(player);
-      break;
+      return calculateRushingScore(player) + 
+             calculateReceivingScore(player) + 
+             calculateReturnScore(player);
     case 'WR':
-        return calculateRushingScore(player) + calculateReceivingScore(player) + calculateReturnScore(player);
-        break;
+      return calculateRushingScore(player) + 
+             calculateReceivingScore(player) + 
+             calculateReturnScore(player);
     case 'TE':
-        return calculateReceivingScore(player);
-        break;
+      return calculateReceivingScore(player);
     default:
-        return 0;
-        break;
-        
+      return 0;
   }
 }
+
+// exporting calculations that we're testing
+module.exports = {
+  calculateScore,
+  calculateRushingScore
+}
+
