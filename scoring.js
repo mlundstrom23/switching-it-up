@@ -35,7 +35,8 @@ function calculateReturnScore(player) {
   return parseFloat((kickYards + kickTouchdowns + kickFumbles + puntYards + puntTouchdowns + puntFumbles).toFixed(2))
 }
 
-module.exports.calculateScore = function (player) {
+// turned into function instead of exporting the calculation
+function calculateScore(player) {
   switch (player.position) {
     case 'QB':
       return calculatePassingScore(player) + 
@@ -53,5 +54,11 @@ module.exports.calculateScore = function (player) {
     default:
       return 0;
   }
+}
+
+// exporting calculations that we're testing
+module.exports = {
+  calculateScore,
+  calculateRushingScore
 }
 

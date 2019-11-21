@@ -1,9 +1,43 @@
 var mocha = require('mocha')
 var calculateScore = require('./scoring').calculateScore
+// importing new calculation for testing
+var calculateRushingScore = require('./scoring').calculateRushingScore 
 var expect = require('chai').expect
 var { describe, it } = mocha
 
 describe('Scoring', function () {
+  it('Calculates the total rushing score', () => {
+    let players = [{
+      position: 'QB',
+      expectedRushingScore: 8,
+      stats: {
+        rushing: { attempts: 3, yards: 20, touchdowns: 2, fumbles: 2 }
+      }
+
+    },{
+      position: 'RB',
+      expectedRushingScore: 5.2,
+      stats: {
+        rushing: { attempts: 3, yards: 22, touchdowns: 1, fumbles: 1 }
+      }
+
+    },{
+      position: 'WR',
+      expectedRushingScore: 18,
+      stats: {
+        rushing: { attampts: 3, yards: 30, touchdowns: 3, fumbles: 1 }
+      }
+    }]  
+
+    // More thorough testing for all players' rushing scores in an array
+    for (var i = 0; i < players.length; i++) {
+      let player = players[i]
+      let rushingScore = calculateRushingScore(player)
+      expect(rushingScore).to.equal(player.expectedRushingScore)
+      console.log({rushingScore})
+    }
+  })
+
   it('returns the score for a quarterback', function () {
     var player = {
       name: 'Patrick Mahomes',
@@ -17,13 +51,13 @@ describe('Scoring', function () {
           touchdowns: 3,
           interceptions: 0
         },
-        rushing: { attempts: 3, yards: 22, touchdowns: 1, fumbles: 0 }
+        rushing: { attempts: 3, yards: 22, touchdowns: 1, fumbles: 0 } 
       }
     }
 
     var score = calculateScore(player)
 
-    expect(score).to.equal(40.72)
+    expect(score).to.equal(40.72) 
   })
 
   it('returns the score for a running back', function () {
